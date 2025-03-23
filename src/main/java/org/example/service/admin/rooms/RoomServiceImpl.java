@@ -1,5 +1,6 @@
 package org.example.service.admin.rooms;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.Room;
 import org.example.dto.RoomsResponse;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,5 +46,14 @@ public class RoomServiceImpl implements RoomService {
         roomsResponse.setRoomDtoList(roomPage.stream().map(RoomEntity::getRoom).collect(Collectors.toList()));
 
         return roomsResponse;
+    }
+
+    public Room getRoomById(Long id) {
+        Optional<RoomEntity> roomEntity = roomDao.findById(id);
+        if (roomEntity.isPresent()) {
+            return roomEntity.get().getRoom();
+        }else {
+            throw new EntityNotFoundException("Room not found");
+        }
     }
 }

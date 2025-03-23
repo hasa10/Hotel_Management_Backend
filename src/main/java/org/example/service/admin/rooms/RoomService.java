@@ -8,4 +8,6 @@ public interface RoomService {
     boolean postRoom(Room roomDto);
 
     RoomsResponse getAllRooms(int pageNumber);
+
+    Room getRoomById(Long id);
 }
