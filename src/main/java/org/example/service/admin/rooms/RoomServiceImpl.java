@@ -56,4 +56,19 @@ public class RoomServiceImpl implements RoomService {
             throw new EntityNotFoundException("Room not found");
         }
     }
+
+    public boolean updateRoom(Long id, Room roomDto) {
+        Optional<RoomEntity> optionalRoom = roomDao.findById(id);
+        if (optionalRoom.isPresent()) {
+            RoomEntity existingRoom = optionalRoom.get();
+
+            existingRoom.setName(roomDto.getName());
+            existingRoom.setPrice(roomDto.getPrice());
+            existingRoom.setType(roomDto.getType());
+
+            roomDao.save(existingRoom);
+            return true;
+        }
+        return false;
+    }
 }
