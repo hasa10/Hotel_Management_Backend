@@ -50,4 +50,14 @@ public class RoomsController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
+    @DeleteMapping("/room/{id}")
+    public ResponseEntity<?> deleteRoom(@PathVariable Long id){
+        try {
+            roomService.deleteRoom(id);
+            return ResponseEntity.ok(null);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 }
