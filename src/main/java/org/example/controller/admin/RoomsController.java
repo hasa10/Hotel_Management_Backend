@@ -3,7 +3,7 @@ package org.example.controller.admin;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.Room;
-import org.example.service.admin.rooms.RoomService;
+import org.example.service.admin.rooms.RoomsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class RoomsController {
 
-    private final RoomService roomService;
+    private final RoomsService roomsService;
 
     @PostMapping("/rooms")
     public ResponseEntity<?> responseEntity(@RequestBody Room room){
-        boolean success = roomService.postRoom(room);
+        boolean success = roomsService.postRoom(room);
         if (success) {
             return ResponseEntity.status(HttpStatus.OK).build();
         }else {
@@ -27,13 +27,13 @@ public class RoomsController {
 
     @GetMapping("/rooms/{pageNumber}")
     public ResponseEntity<?> getAllRooms(@PathVariable int pageNumber){
-        return ResponseEntity.ok(roomService.getAllRooms(pageNumber));
+        return ResponseEntity.ok(roomsService.getAllRooms(pageNumber));
     }
 
     @GetMapping("/room/{id}")
     public ResponseEntity<?> getRoomById(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok(roomService.getRoomById(id));
+            return ResponseEntity.ok(roomsService.getRoomById(id));
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {
@@ -43,7 +43,7 @@ public class RoomsController {
 
     @PutMapping("/room/{id}")
     public ResponseEntity<?> updateRoom(@PathVariable Long id, @RequestBody Room room){
-        boolean success = roomService.updateRoom(id, room);
+        boolean success = roomsService.updateRoom(id, room);
         if (success) {
             return ResponseEntity.status(HttpStatus.OK).build();
         }else {
@@ -54,7 +54,7 @@ public class RoomsController {
     @DeleteMapping("/room/{id}")
     public ResponseEntity<?> deleteRoom(@PathVariable Long id){
         try {
-            roomService.deleteRoom(id);
+            roomsService.deleteRoom(id);
             return ResponseEntity.ok(null);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

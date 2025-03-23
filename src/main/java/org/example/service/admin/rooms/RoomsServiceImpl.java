@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class RoomServiceImpl implements RoomService {
+public class RoomsServiceImpl implements RoomsService {
     private final RoomDao roomDao;
 
     public boolean postRoom(Room roomDto) {

@@ -1,6 +1,5 @@
 package org.example.service.customer.room;
 
-
 import lombok.RequiredArgsConstructor;
 import org.example.dto.RoomsResponse;
 import org.example.entity.RoomEntity;
@@ -14,13 +13,13 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class RoomsServiceImpl {
+public class RoomServiceImpl implements RoomService {
 
     private final RoomDao roomDao;
 
     public RoomsResponse getAvailableRooms(int pageNumber) {
         Pageable pageable = PageRequest.of(pageNumber, 6);
-        Page<RoomEntity> roomPage = roomDao.findByAvailable(true,pageable);
+        Page<RoomEntity> roomPage = roomDao.findByAvailable(true, pageable);
 
         RoomsResponse roomsResponse = new RoomsResponse();
         roomsResponse.setPageNumber(roomPage.getPageable().getPageNumber());

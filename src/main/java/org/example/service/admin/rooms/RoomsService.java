@@ -3,7 +3,7 @@ package org.example.service.admin.rooms;
 import org.example.dto.Room;
 import org.example.dto.RoomsResponse;
 
-public interface RoomService {
+public interface RoomsService {
 
     boolean postRoom(Room roomDto);
 

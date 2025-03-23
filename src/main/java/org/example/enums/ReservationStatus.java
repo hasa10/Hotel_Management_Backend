@@ -1,2 +1,5 @@
-package org.example.enums;public class ReservationStatus {
+package org.example.enums;
+
+public enum ReservationStatus {
+    PENDING,APPROVED,REJECTED
 }
