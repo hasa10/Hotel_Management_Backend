@@ -3,6 +3,7 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.example.dto.Reservation;
 import org.example.enums.ReservationStatus;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -34,4 +35,24 @@ public class ReservationEntity {
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private UserEntity user;
+
+
+    public Reservation getReservationDto() {
+        Reservation reservation = new Reservation();
+
+        reservation.setId(id);
+        reservation.setPrice(price);
+        reservation.setCheckInDate(checkInDate);
+        reservation.setCheckOutDate(checkOutDate);
+        reservation.setStatus(status);
+
+        reservation.setUserId(user.getId());
+        reservation.setUserName(user.getName());
+
+        reservation.setRoomId(room.getId());
+        reservation.setRoomName(room.getName());
+        reservation.setRoomType(room.getType());
+
+        return reservation;
+    }
 }

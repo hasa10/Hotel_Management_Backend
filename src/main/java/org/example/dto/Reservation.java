@@ -1,8 +1,8 @@
 package org.example.dto;
 
+
 import lombok.Data;
 import org.example.enums.ReservationStatus;
-
 import java.time.LocalDate;
 
 @Data
@@ -27,4 +27,6 @@ public class Reservation {
     private Long userId;
 
     private String userName;
+
+
 }
